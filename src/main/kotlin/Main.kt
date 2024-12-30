@@ -1,7 +1,15 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import heroes.Cleric
+import heroes.Warrior
+import heroes.Wizard
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+fun main() {
+    val heroes = listOf(
+        Warrior("Guy"),
+        Wizard("Helena"),
+        Cleric("Alice")
+    )
+
+    for (hero in heroes) {
+        hero.attack()
+    }
 }

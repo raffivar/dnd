@@ -31,3 +31,54 @@ compileTestKotlin {
 application {
     mainClassName = 'MainKt'
 }
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) { publication ->
+            from components.kotlin // Use the Kotlin component
+
+            pom {
+                name.set('dnd')
+                description.set('A Kotlin SDK for a D&D themed application.')
+                url.set('https://github.com/raffivar/dnd')
+
+                licenses {
+                    license {
+                        name.set('The Apache License, Version 2.0')
+                        url.set('http://www.apache.org/licenses/LICENSE-2.0.txt')
+                    }
+                }
+
+                developers {
+                    developer {
+                        id.set('raffivar')
+                        name.set('Your Name')
+                        email.set('your-email@example.com')
+                    }
+                }
+
+                scm {
+                    connection.set('scm:git:git://github.com/raffivar/dnd.git')
+                    developerConnection.set('scm:git:ssh://github.com/raffivar/dnd.git')
+                    url.set('https://github.com/raffivar/dnd')
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'Sonatype'
+            url = uri('https://oss.sonatype.org/service/local/staging/deploy/maven2/')
+            credentials {
+                username = System.getenv('OSSRH_USERNAME')
+                password = System.getenv('OSSRH_PASSWORD')
+            }
+        }
+    }
+}
+
+signing {
+    useInMemoryPgpKeys(System.getenv('GPG_KEY'), System.getenv('GPG_PASSWORD'))
+    sign publishing.publications.mavenJava
+}

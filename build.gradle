@@ -31,3 +31,42 @@ compileTestKotlin {
 application {
     mainClassName = 'MainKt'
 }
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.kotlin // ✅ Use the Kotlin component
+
+            groupId = 'com.slaydom' as Publication
+            artifactId = 'dnd'
+            version = '1.0.0'
+
+            pom {
+                name = 'DND SDK'
+                description = 'A Kotlin SDK for a D&D themed application.'
+                url = 'https://github.com/raffivar/dnd'
+
+                licenses {
+                    license {
+                        name = 'Apache License, Version 2.0'
+                        url = 'https://www.apache.org/licenses/LICENSE-2.0'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'raffivar'
+                        name = 'Your Name' // Replace with your real name
+                        email = 'your-email@example.com' // Replace with your actual email
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:git://github.com/raffivar/dnd.git'
+                    developerConnection = 'scm:git:ssh://github.com/raffivar/dnd.git'
+                    url = 'https://github.com/raffivar/dnd'
+                }
+            }
+        }
+    }
+}

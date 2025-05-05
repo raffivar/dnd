@@ -1,0 +1,59 @@
+project:
+  name: dnd
+  version: 1.0.0
+  description: A Kotlin SDK for Dungeons & Drag Queens.
+  authors:
+    - Raffi V.
+  license: MIT
+  website: https://github.com/raffivar/dnd
+  inceptionYear: 2024
+
+release:
+  github:
+    owner: raffivar
+    name: dnd
+    tagName: '{{projectVersion}}'
+    releaseName: 'v{{projectVersion}}'
+    draft: false
+    prerelease: false
+    changelog:
+      enabled: true
+      formatted: always
+      format: '- {{commitShortHash}} {{commitTitle}}'
+      skipMergeCommits: true
+
+distributions:
+  dnd:
+    artifacts:
+      - path: build/libs/dnd-{{projectVersion}}.jar
+    active: ALWAYS
+    type: JAVA_BINARY
+
+signing:
+  active: ALWAYS
+  armored: true
+  command: gpg
+  publicKey: |
+    # Paste your GPG PUBLIC KEY BLOCK here
+  secretKey: |
+    # Paste your GPG PRIVATE KEY BLOCK here
+  passphrase: {{GPG_PASSPHRASE}}
+
+deploy:
+  maven:
+    central:
+      active: ALWAYS
+      url: https://s01.oss.sonatype.org/service/local/
+      stagingRepository: ''
+      credentials:
+        username: {{SONATYPE_USERNAME}}
+        password: {{SONATYPE_PASSWORD}}
+      gpg:
+        sign: true
+        armored: true
+
+environment:
+  variables:
+    GPG_PASSPHRASE: YOUR_GPG_PASSPHRASE
+    SONATYPE_USERNAME: YOUR_SONATYPE_USERNAME
+    SONATYPE_PASSWORD: YOUR_SONATYPE_PASSWORD

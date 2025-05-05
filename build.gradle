@@ -2,7 +2,6 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.9.22'
     id 'application'
     id 'maven-publish'
-    id 'signing'
 }
 
 group = 'com.slaydom'
@@ -45,7 +44,7 @@ publishing {
                     developer {
                         id = 'raffivar'
                         name = 'Raffi V.'
-                        email = 'your-email@example.com' // Replace
+                        email = 'your-email@example.com'
                     }
                 }
 
@@ -55,13 +54,4 @@ publishing {
             }
         }
     }
-}
-
-signing {
-    // Optional: only include if you want to sign inside Gradle for local testing
-    useInMemoryPgpKeys(
-            System.getenv("SIGNING_KEY"),
-            System.getenv("SIGNING_PASSWORD")
-    )
-    sign publishing.publications.mavenJava
 }
